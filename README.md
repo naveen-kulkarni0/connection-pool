@@ -1,6 +1,6 @@
 # Connection Pool
 This project signifies the importance of a connection pool and a simple implementation using blocking queue.
-Blocking is the most common data structure to implement the connection poll.
+Blocking queue is the most common data structure to implement the connection poll.
 
 # Run 
 In order to run this you would need a mysql started and listening on port 3306 ( default ). You would also need to
