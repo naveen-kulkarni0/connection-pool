@@ -1,5 +1,6 @@
 package org.example
 
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.sql.Connection
 import java.sql.DriverManager.getConnection
@@ -11,14 +12,17 @@ val queue = ArrayBlockingQueue<Connection>(10)
 
 fun main() {
     createConnections()
-    val timeMillis = measureTimeMillis {
-        runBlocking {
-            for (i in 1..10000) {
+    runBlocking {
+        val timeMillis = measureTimeMillis {
+        val jobs =  List(10_00_00) {
+            launch {
                 executeQueryUsingPool()
             }
         }
+        jobs.forEach { it.join() }
     }
-    println("Total time taken to execute is $timeMillis")
+        println("Total time taken to execute is $timeMillis") }
+
 
 }
 
